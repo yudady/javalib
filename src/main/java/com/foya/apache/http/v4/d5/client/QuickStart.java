@@ -59,6 +59,8 @@ public class QuickStart {
                 HttpEntity entity1 = response1.getEntity();
                 // do something useful with the response body
                 // and ensure it is fully consumed
+                entity1.writeTo(System.err);
+
                 EntityUtils.consume(entity1);
             } finally {
                 response1.close();
@@ -76,6 +78,9 @@ public class QuickStart {
                 HttpEntity entity2 = response2.getEntity();
                 // do something useful with the response body
                 // and ensure it is fully consumed
+
+                entity2.writeTo(System.err);
+
                 EntityUtils.consume(entity2);
             } finally {
                 response2.close();

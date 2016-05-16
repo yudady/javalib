@@ -47,7 +47,8 @@ public class ClientWithResponseHandler {
     public final static void main(String[] args) throws Exception {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet("http://httpbin.org/");
+            //HttpGet httpget = new HttpGet("http://httpbin.org/");
+            HttpGet httpget = new HttpGet("https://httpbin.org/");
 
             System.out.println("Executing request " + httpget.getRequestLine());
 
