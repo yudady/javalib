@@ -21,7 +21,7 @@ public class TestFoyaHttpServer {
 	private static final Logger mLogger = LoggerFactory.getLogger(TestFoyaHttpServer.class);
 
 	public static void main(String[] args) throws Exception {
-		FoyaHttpServer server = new FoyaHttpServer();
+		FoyaServer server = new FoyaServer("127.0.0.1",30008);
 		server.setTimeout(5000);
 
 		// Initialize the server-side request handler

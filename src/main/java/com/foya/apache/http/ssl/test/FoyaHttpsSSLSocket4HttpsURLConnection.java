@@ -53,7 +53,7 @@ public class FoyaHttpsSSLSocket4HttpsURLConnection {
 		} };
 
 		// Install the all-trusting trust manager
-		SSLContext sc = SSLContext.getInstance("SSL");
+		SSLContext sc = SSLContext.getInstance("TLS");
 		sc.init(null, trustAllCerts, new java.security.SecureRandom());
 		HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 

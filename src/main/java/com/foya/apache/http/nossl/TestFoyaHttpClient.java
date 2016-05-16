@@ -20,7 +20,7 @@ import org.apache.http.message.BasicHttpRequest;
 public class TestFoyaHttpClient {
 
 	public static void main(String[] args) throws Exception {
-		FoyaHttpClient client = new FoyaHttpClient();
+		FoyaClient client = new FoyaClient();
 		client.setTimeout(5000);
 		DefaultBHttpClientConnection conn = client.createConnection();
 

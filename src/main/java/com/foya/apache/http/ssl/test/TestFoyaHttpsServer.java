@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import com.foya.apache.http.ssl.coltroller.IndexController;
 import com.foya.apache.http.ssl.coltroller.NoMatchController;
 import com.foya.apache.http.ssl.coltroller.TstarController;
-import com.foya.apache.http.ssl.server.FoyaHttpsServer;
+import com.foya.apache.http.ssl.server.FoyaSslServer;
 
 public class TestFoyaHttpsServer {
 
 	private static final Logger mLogger = LoggerFactory.getLogger(TestFoyaHttpsServer.class);
 
 	public static void main(String[] args) throws Exception {
-		FoyaHttpsServer server = new FoyaHttpsServer();
+		FoyaSslServer server = new FoyaSslServer("127.0.0.1", 30008);
 		server.setTimeout(5000);
 
 		// Initialize the server-side request handler

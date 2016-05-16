@@ -1,4 +1,4 @@
-package com.foya.apache.http.ssl.test;
+package com.foya.apache.http.nossl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,15 +16,12 @@ import org.apache.http.protocol.HttpRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.foya.apache.http.ssl.server.FoyaSslClient;
-import com.foya.apache.http.ssl.server.FoyaSslServer;
+public class TestConnection {
 
-public class Test2Ssl {
-
-	private static final Logger mLogger = LoggerFactory.getLogger(Test2Ssl.class);
+	private static final Logger mLogger = LoggerFactory.getLogger(TestConnection.class);
 
 	public static void main(String[] args) throws Exception {
-		FoyaSslServer server = new FoyaSslServer("127.0.0.1", 30008);
+		FoyaServer server = new FoyaServer("127.0.0.1", 30008);
 		server.setTimeout(5000);
 
 		// Initialize the server-side request handler
@@ -48,11 +45,11 @@ public class Test2Ssl {
 			mLogger.debug("" + i);
 
 			if (i > 2) {
-				FoyaSslClient client = new FoyaSslClient();
+				FoyaClient client = new FoyaClient();
 				client.setTimeout(5000);
 				DefaultBHttpClientConnection conn = client.createConnection();
 
-				HttpHost host = new HttpHost("localhost", 9999);
+				HttpHost host = new HttpHost("127.0.0.1", 30008);
 				if (!conn.isOpen()) {
 					client.connect(host, conn);
 				}
