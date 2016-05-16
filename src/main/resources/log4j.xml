@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+		<!--
+			<param name="ConversionPattern" value="%-5p %c %m%n" />
+		 -->
+			<param name="ConversionPattern" value="%-5p %m%n" />
+		</layout>
+
+		<!--限制輸出級別 -->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="TRACE" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+
+
+   <!-- ========================================= -->
+   <!-- Limit categories 對 class: com.demos 作偵錯觀察 -->
+   <!-- ========================================= -->
+   <category name="org.apache.http.wire">
+      <priority value="debug"/>
+   </category>
+
+	<root>
+		<priority value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</log4j:configuration>
