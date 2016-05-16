@@ -1,58 +1,86 @@
-package com.foya.apache.http.v5;
+/*
+ * ====================================================================
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Apache Software Foundation.  For more
+ * information on the Apache Software Foundation, please see
+ * <http://www.apache.org/>.
+ *
+ */
+
+package com.foya.apache.http.v4.d5.client;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.CodingErrorAction;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import javax.net.ssl.SSLContext;
 
-import org.apache.hc.client5.http.DnsResolver;
-import org.apache.hc.client5.http.HttpConnectionFactory;
-import org.apache.hc.client5.http.HttpRoute;
-import org.apache.hc.client5.http.SystemDefaultDnsResolver;
-import org.apache.hc.client5.http.auth.CredentialsProvider;
-import org.apache.hc.client5.http.config.AuthSchemes;
-import org.apache.hc.client5.http.config.CookieSpecs;
-import org.apache.hc.client5.http.config.RequestConfig;
-import org.apache.hc.client5.http.cookie.BasicCookieStore;
-import org.apache.hc.client5.http.cookie.CookieStore;
-import org.apache.hc.client5.http.impl.io.DefaultHttpResponseParserFactory;
-import org.apache.hc.client5.http.impl.io.LenientHttpResponseParser;
-import org.apache.hc.client5.http.impl.io.ManagedHttpClientConnectionFactory;
-import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
-import org.apache.hc.client5.http.impl.sync.BasicCredentialsProvider;
-import org.apache.hc.client5.http.impl.sync.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.sync.HttpClients;
-import org.apache.hc.client5.http.io.ManagedHttpClientConnection;
-import org.apache.hc.client5.http.methods.CloseableHttpResponse;
-import org.apache.hc.client5.http.methods.HttpGet;
-import org.apache.hc.client5.http.protocol.HttpClientContext;
-import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
-import org.apache.hc.client5.http.socket.PlainConnectionSocketFactory;
-import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
-import org.apache.hc.core5.http.Header;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.HttpHost;
-import org.apache.hc.core5.http.HttpRequest;
-import org.apache.hc.core5.http.HttpResponse;
-import org.apache.hc.core5.http.ParseException;
-import org.apache.hc.core5.http.config.ConnectionConfig;
-import org.apache.hc.core5.http.config.MessageConstraints;
-import org.apache.hc.core5.http.config.Registry;
-import org.apache.hc.core5.http.config.RegistryBuilder;
-import org.apache.hc.core5.http.config.SocketConfig;
-import org.apache.hc.core5.http.entity.EntityUtils;
-import org.apache.hc.core5.http.impl.DefaultHttpResponseFactory;
-import org.apache.hc.core5.http.impl.io.DefaultHttpRequestWriterFactory;
-import org.apache.hc.core5.http.io.HttpMessageParser;
-import org.apache.hc.core5.http.io.HttpMessageParserFactory;
-import org.apache.hc.core5.http.io.HttpMessageWriterFactory;
-import org.apache.hc.core5.http.message.BasicHeader;
-import org.apache.hc.core5.http.message.BasicLineParser;
-import org.apache.hc.core5.http.message.LineParser;
-import org.apache.hc.core5.ssl.SSLContexts;
-import org.apache.hc.core5.util.CharArrayBuffer;
+import org.apache.http.Consts;
+import org.apache.http.Header;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.AuthSchemes;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.config.ConnectionConfig;
+import org.apache.http.config.MessageConstraints;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.config.SocketConfig;
+import org.apache.http.conn.DnsResolver;
+import org.apache.http.conn.HttpConnectionFactory;
+import org.apache.http.conn.ManagedHttpClientConnection;
+import org.apache.http.conn.routing.HttpRoute;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.DefaultHttpResponseFactory;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.DefaultHttpResponseParser;
+import org.apache.http.impl.conn.DefaultHttpResponseParserFactory;
+import org.apache.http.impl.conn.ManagedHttpClientConnectionFactory;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.impl.conn.SystemDefaultDnsResolver;
+import org.apache.http.impl.io.DefaultHttpRequestWriterFactory;
+import org.apache.http.io.HttpMessageParser;
+import org.apache.http.io.HttpMessageParserFactory;
+import org.apache.http.io.HttpMessageWriterFactory;
+import org.apache.http.io.SessionInputBuffer;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicLineParser;
+import org.apache.http.message.LineParser;
+import org.apache.http.ssl.SSLContexts;
+import org.apache.http.util.CharArrayBuffer;
+import org.apache.http.util.EntityUtils;
 
 /**
  * This example demonstrates how to customize and configure the most common aspects
@@ -67,7 +95,8 @@ public class ClientConfiguration {
         HttpMessageParserFactory<HttpResponse> responseParserFactory = new DefaultHttpResponseParserFactory() {
 
             @Override
-            public HttpMessageParser<HttpResponse> create(MessageConstraints constraints) {
+            public HttpMessageParser<HttpResponse> create(
+                SessionInputBuffer buffer, MessageConstraints constraints) {
                 LineParser lineParser = new BasicLineParser() {
 
                     @Override
@@ -80,7 +109,16 @@ public class ClientConfiguration {
                     }
 
                 };
-                return new LenientHttpResponseParser(lineParser, DefaultHttpResponseFactory.INSTANCE, constraints);
+                return new DefaultHttpResponseParser(
+                    buffer, lineParser, DefaultHttpResponseFactory.INSTANCE, constraints) {
+
+                    @Override
+                    protected boolean reject(final CharArrayBuffer line, int count) {
+                        // try to ignore all garbage preceding a status line infinitely
+                        return false;
+                    }
+
+                };
             }
 
         };
@@ -147,7 +185,7 @@ public class ClientConfiguration {
         ConnectionConfig connectionConfig = ConnectionConfig.custom()
             .setMalformedInputAction(CodingErrorAction.IGNORE)
             .setUnmappableInputAction(CodingErrorAction.IGNORE)
-            .setCharset(StandardCharsets.UTF_8)
+            .setCharset(Consts.UTF_8)
             .setMessageConstraints(messageConstraints)
             .build();
         // Configure the connection manager to use connection configuration either
@@ -174,23 +212,24 @@ public class ClientConfiguration {
             .build();
 
         // Create an HttpClient with the given custom dependencies and configuration.
+        CloseableHttpClient httpclient = HttpClients.custom()
+            .setConnectionManager(connManager)
+            .setDefaultCookieStore(cookieStore)
+            .setDefaultCredentialsProvider(credentialsProvider)
+            .setProxy(new HttpHost("myproxy", 8080))
+            .setDefaultRequestConfig(defaultRequestConfig)
+            .build();
 
-        try (CloseableHttpClient httpclient = HttpClients.custom()
-                .setConnectionManager(connManager)
-                .setDefaultCookieStore(cookieStore)
-                .setDefaultCredentialsProvider(credentialsProvider)
-                .setProxy(new HttpHost("myproxy", 8080))
-                .setDefaultRequestConfig(defaultRequestConfig)
-                .build()) {
+        try {
             HttpGet httpget = new HttpGet("http://httpbin.org/get");
             // Request configuration can be overridden at the request level.
             // They will take precedence over the one set at the client level.
             RequestConfig requestConfig = RequestConfig.copy(defaultRequestConfig)
-                    .setSocketTimeout(5000)
-                    .setConnectTimeout(5000)
-                    .setConnectionRequestTimeout(5000)
-                    .setProxy(new HttpHost("myotherproxy", 8080))
-                    .build();
+                .setSocketTimeout(5000)
+                .setConnectTimeout(5000)
+                .setConnectionRequestTimeout(5000)
+                .setProxy(new HttpHost("myotherproxy", 8080))
+                .build();
             httpget.setConfig(requestConfig);
 
             // Execution context can be customized locally.
@@ -201,12 +240,12 @@ public class ClientConfiguration {
             context.setCredentialsProvider(credentialsProvider);
 
             System.out.println("executing request " + httpget.getURI());
-            try (CloseableHttpResponse response = httpclient.execute(httpget, context)) {
-                HttpEntity entity = response.getEntity();
-
+            CloseableHttpResponse response = httpclient.execute(httpget, context);
+            try {
                 System.out.println("----------------------------------------");
                 System.out.println(response.getStatusLine());
                 System.out.println(EntityUtils.toString(response.getEntity()));
+                System.out.println("----------------------------------------");
 
                 // Once the request has been executed the local context can
                 // be used to examine updated state and various objects affected
@@ -216,8 +255,10 @@ public class ClientConfiguration {
                 context.getRequest();
                 // Execution route
                 context.getHttpRoute();
-                // Auth exchanges
-                context.getAuthExchanges();
+                // Target auth state
+                context.getTargetAuthState();
+                // Proxy auth state
+                context.getTargetAuthState();
                 // Cookie origin
                 context.getCookieOrigin();
                 // Cookie spec used
@@ -225,7 +266,11 @@ public class ClientConfiguration {
                 // User security token
                 context.getUserToken();
 
+            } finally {
+                response.close();
             }
+        } finally {
+            httpclient.close();
         }
     }
 

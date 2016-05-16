@@ -140,6 +140,18 @@
 			<artifactId>httpmime</artifactId>
 			<version>4.5.2</version>
 		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.httpcomponents/fluent-hc -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>fluent-hc</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient-win</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore-ab</artifactId>
@@ -150,9 +162,22 @@
 			<artifactId>httpcore-nio</artifactId>
 			<version>4.4.4</version>
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.apache.httpcomponents.client5</groupId>
 			<artifactId>httpclient5</artifactId>
+			<version>5.0-alpha1</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5-fluent -->
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5-fluent</artifactId>
+			<version>5.0-alpha1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5-win</artifactId>
 			<version>5.0-alpha1</version>
 		</dependency>
 
